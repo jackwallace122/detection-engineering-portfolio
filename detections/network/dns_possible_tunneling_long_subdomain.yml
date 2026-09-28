@@ -1,0 +1,30 @@
+title: Possible DNS Tunneling via Long Subdomain Labels
+id: d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6
+status: experimental
+description: |
+  Detects DNS queries containing an unusually long alphanumeric label, a common
+  sign of data being encoded into DNS for command-and-control or exfiltration.
+references:
+  - https://attack.mitre.org/techniques/T1071/004/
+  - https://attack.mitre.org/techniques/T1048/
+author: Your Name
+date: 2026-09-28
+tags:
+  - attack.command-and-control
+  - attack.t1071.004
+  - attack.exfiltration
+  - attack.t1048
+logsource:
+  category: dns
+detection:
+  selection:
+    query|re: '^[a-zA-Z0-9\-]{40,}\.'
+  filter_known:
+    query|endswith:
+      - '.amazonaws.com'
+      - '.akamaiedge.net'
+      - '.cloudfront.net'
+  condition: selection and not filter_known
+falsepositives:
+  - CDNs and security products (some AV vendors use DNS lookups for reputation). Tune the filter list to your environment.
+level: low

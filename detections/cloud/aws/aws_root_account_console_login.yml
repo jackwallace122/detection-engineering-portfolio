@@ -1,0 +1,25 @@
+title: AWS Root Account Console Login
+id: c9d8e7f6-1a2b-4c3d-8e4f-5a6b7c8d9e0f
+status: stable
+description: |
+  Detects a console sign-in using the AWS root account. Root should almost never be
+  used day to day; any login warrants verification.
+references:
+  - https://attack.mitre.org/techniques/T1078/004/
+author: Your Name
+date: 2026-09-28
+tags:
+  - attack.initial-access
+  - attack.privilege-escalation
+  - attack.t1078.004
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventName: ConsoleLogin
+    userIdentity.type: Root
+  condition: selection
+falsepositives:
+  - Billing or account-level tasks that require root. These should be rare and documented.
+level: high
