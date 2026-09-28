@@ -71,7 +71,7 @@ sigma convert -t splunk -p sysmon detections/windows/
 ## Quick start
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/detection-engineering-portfolio.git
+git clone https://github.com/jack.wallace122/detection-engineering-portfolio.git
 cd detection-engineering-portfolio
 pip install -r requirements.txt
 python scripts/validate_rules.py detections/
